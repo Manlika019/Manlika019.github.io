@@ -1,49 +1,45 @@
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
 }
-
 
 body{
-
-margin:0;
-
-font-family:'Kanit',sans-serif;
-
-background:#fff5fa;
-
+    margin:0;
+    font-family:'Kanit',sans-serif;
+    background:#fff5fa;
 }
-
 
 
 header{
+    text-align:center;
+    padding:25px;
+}
 
-text-align:center;
 
-padding:30px;
+header h1{
+    color:#e98ab7;
+    font-size:36px;
+}
 
+
+header p{
+    font-size:20px;
 }
 
 
 
-h1{
-
-color:#e98ab7;
-
-}
-
-
+/* รูปหน้า Portfolio */
 
 .gallery{
 
-display:flex;
+    display:flex;
 
-flex-wrap:wrap;
+    flex-wrap:wrap;
 
-gap:20px;
+    justify-content:center;
 
-justify-content:center;
+    gap:20px;
 
-padding:20px;
+    padding:20px;
 
 }
 
@@ -51,13 +47,13 @@ padding:20px;
 
 .card{
 
-width:180px;
+    width:170px;
 
-cursor:pointer;
+    cursor:pointer;
 
-text-align:center;
+    text-align:center;
 
-transition:.3s;
+    transition:.3s;
 
 }
 
@@ -65,15 +61,15 @@ transition:.3s;
 
 .card img{
 
-width:180px;
+    width:170px;
 
-height:240px;
+    height:220px;
 
-object-fit:cover;
+    object-fit:cover;
 
-border-radius:18px;
+    border-radius:15px;
 
-box-shadow:0 5px 20px #ccc;
+    box-shadow:0 5px 15px #ccc;
 
 }
 
@@ -81,72 +77,83 @@ box-shadow:0 5px 20px #ccc;
 
 .card:hover{
 
-transform:translateY(-10px) scale(1.05);
+    transform:translateY(-8px) scale(1.05);
 
 }
 
 
 
 
-/* popup */
-
+/* พื้นหลังตอนขยาย */
 
 .popup{
 
-display:none;
+    display:none;
 
-position:fixed;
+    position:fixed;
 
-inset:0;
+    top:0;
 
-background:rgba(0,0,0,.85);
+    left:0;
 
-justify-content:center;
+    width:100%;
 
-align-items:center;
+    height:100%;
 
-z-index:999;
+    background:rgba(0,0,0,.75);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:999;
 
 }
 
 
+
+/* รูปใหญ่ */
 
 .popup img{
 
-max-width:75vw;
+    width:380px;
 
-max-height:85vh;
+    max-width:70vw;
 
-border-radius:20px;
+    max-height:70vh;
 
-animation:show .5s;
+    object-fit:contain;
 
-box-shadow:0 0 40px black;
+    border-radius:20px;
 
-}
+    box-shadow:0 10px 40px black;
 
-
-
-@keyframes show{
-
-
-from{
-
-transform:scale(.2);
-
-opacity:0;
+    animation:zoom .35s ease;
 
 }
 
 
-to{
 
-transform:scale(1);
 
-opacity:1;
+/* เอฟเฟกต์ขยายจากเล็ก */
 
-}
+@keyframes zoom{
 
+    from{
+
+        transform:scale(.3);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
 
 }
 
@@ -155,21 +162,21 @@ opacity:1;
 
 button{
 
-position:absolute;
+    position:absolute;
 
-border:none;
+    width:50px;
 
-background:white;
+    height:50px;
 
-width:55px;
+    border:none;
 
-height:55px;
+    border-radius:50%;
 
-border-radius:50%;
+    background:white;
 
-font-size:35px;
+    font-size:30px;
 
-cursor:pointer;
+    cursor:pointer;
 
 }
 
@@ -177,9 +184,9 @@ cursor:pointer;
 
 #close{
 
-top:40px;
+    top:30px;
 
-right:50px;
+    right:40px;
 
 }
 
@@ -187,7 +194,7 @@ right:50px;
 
 #prev{
 
-left:40px;
+    left:40px;
 
 }
 
@@ -195,7 +202,7 @@ left:40px;
 
 #next{
 
-right:40px;
+    right:40px;
 
 }
 
@@ -203,12 +210,12 @@ right:40px;
 
 #number{
 
-position:absolute;
+    position:absolute;
 
-bottom:30px;
+    bottom:40px;
 
-color:white;
+    color:white;
 
-font-size:22px;
+    font-size:20px;
 
 }
