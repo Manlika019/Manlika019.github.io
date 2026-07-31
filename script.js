@@ -1,35 +1,53 @@
-// สร้าง Lightbox
-const lightbox = document.createElement("div");
-lightbox.id = "lightbox";
+const totalPages = 12;
+let currentPage = 1;
 
-const img = document.createElement("img");
-lightbox.appendChild(img);
+const image = document.getElementById("pageImage");
+const pageNumber = document.getElementById("pageNumber");
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
 
-document.body.appendChild(lightbox);
+// แสดงรูป
+function showPage(page) {
+    image.style.opacity = 0;
 
-// เมื่อคลิกที่รูป
-const images = document.querySelectorAll(".page img");
+    setTimeout(() => {
+        image.src = page + ".jpg";
+        pageNumber.textContent = `หน้า ${page} / ${totalPages}`;
+        image.style.opacity = 1;
+    }, 200);
 
-images.forEach((image) => {
-    image.addEventListener("click", () => {
-        img.src = image.src;
-        lightbox.style.display = "flex";
-    });
-});
+    prev.disabled = (page === 1);
+    next.disabled = (page === totalPages);
+}
 
-// คลิกพื้นหลังเพื่อปิด
-lightbox.addEventListener("click", () => {
-    lightbox.style.display = "none";
-});
-
-// กด ESC เพื่อปิด
-document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-        lightbox.style.display = "none";
+// ปุ่มถัดไป
+next.addEventListener("click", () => {
+    if (currentPage < totalPages) {
+        currentPage++;
+        showPage(currentPage);
     }
 });
 
-// เลื่อนขึ้นบนสุดเมื่อเปิดเว็บ
-window.onload = function () {
-    window.scrollTo(0, 0);
-};
+// ปุ่มก่อนหน้า
+prev.addEventListener("click", () => {
+    if (currentPage > 1) {
+        currentPage--;
+        showPage(currentPage);
+    }
+});
+
+// คีย์บอร์ด
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" && currentPage < totalPages) {
+        currentPage++;
+        showPage(currentPage);
+    }
+
+    if (e.key === "ArrowLeft" && currentPage > 1) {
+        currentPage--;
+        showPage(currentPage);
+    }
+});
+
+// เริ่มต้น
+showPage(currentPage);
