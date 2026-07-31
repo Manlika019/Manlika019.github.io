@@ -4,40 +4,54 @@
 
 
 body{
+
     margin:0;
+
     background:#fff7fb;
+
     font-family:'Kanit',sans-serif;
+
 }
 
 
 /* หัวข้อ */
 
 header{
+
     text-align:center;
+
     padding:25px;
+
 }
 
 
 header h1{
+
     margin:0;
+
     color:#e889b5;
+
     font-size:40px;
+
 }
 
 
 header p{
+
     font-size:20px;
+
 }
 
 
 
-/* กระดานรูป แถวละ 4 */
+
+/* รูปเรียงแถวละ 4 */
 
 .board{
 
     display:grid;
 
-    grid-template-columns:repeat(4, 150px);
+    grid-template-columns:repeat(4,150px);
 
     gap:20px;
 
@@ -113,6 +127,8 @@ header p{
 
 
 
+/* กล่องรูปใหญ่ */
+
 .popup-box{
 
     position:relative;
@@ -121,11 +137,11 @@ header p{
 
 
 
-/* รูปใหญ่ */
+/* รูปที่ขยาย */
 
 .popup-box img{
 
-    width:450px;
+    width:420px;
 
     max-width:70vw;
 
@@ -143,6 +159,9 @@ header p{
 
 
 
+
+/* เอฟเฟกต์เด้ง */
+
 @keyframes zoom{
 
     from{
@@ -152,6 +171,7 @@ header p{
         opacity:0;
 
     }
+
 
     to{
 
