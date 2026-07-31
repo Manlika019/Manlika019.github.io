@@ -1,22 +1,217 @@
-<section>
-    <h2>ผลงาน (Portfolio)</h2>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio | มัลลิกา จั่นพิจิตร</title>
 
-    <div class="gallery">
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+    scroll-behavior:smooth;
+}
 
-        <div class="card"><img src="images/1.jpg" alt="ผลงาน 1"></div>
-        <div class="card"><img src="images/2.jpg" alt="ผลงาน 2"></div>
-        <div class="card"><img src="images/3.jpg" alt="ผลงาน 3"></div>
-        <div class="card"><img src="images/4.jpg" alt="ผลงาน 4"></div>
+body{
+    background:#fff6fa;
+    color:#444;
+}
 
-        <div class="card"><img src="images/5.jpg" alt="ผลงาน 5"></div>
-        <div class="card"><img src="images/6.jpg" alt="ผลงาน 6"></div>
-        <div class="card"><img src="images/7.jpg" alt="ผลงาน 7"></div>
-        <div class="card"><img src="images/8.jpg" alt="ผลงาน 8"></div>
+/* เมนู */
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:#ffe4ef;
+    display:flex;
+    justify-content:center;
+    gap:35px;
+    padding:18px;
+    box-shadow:0 4px 10px rgba(0,0,0,.08);
+    z-index:999;
+}
 
-        <div class="card"><img src="images/9.jpg" alt="ผลงาน 9"></div>
-        <div class="card"><img src="images/10.jpg" alt="ผลงาน 10"></div>
-        <div class="card"><img src="images/11.jpg" alt="ผลงาน 11"></div>
-        <div class="card"><img src="images/12.jpg" alt="ผลงาน 12"></div>
+nav a{
+    text-decoration:none;
+    color:#d63384;
+    font-weight:bold;
+    transition:.3s;
+}
 
-    </div>
+nav a:hover{
+    color:#ff4f9a;
+}
+
+/* Header */
+header{
+    padding:120px 20px 70px;
+    text-align:center;
+    background:linear-gradient(135deg,#ff9ecf,#ffc1dd,#ffd6e8);
+    color:white;
+}
+
+header img{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    border:6px solid white;
+    object-fit:cover;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+header h1{
+    margin-top:20px;
+    font-size:40px;
+}
+
+header p{
+    margin-top:10px;
+    font-size:18px;
+}
+
+/* เนื้อหา */
+section{
+    max-width:1100px;
+    margin:auto;
+    padding:70px 20px;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:35px;
+    color:#d63384;
+}
+
+/* Gallery */
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.gallery img{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+    border-radius:18px;
+    cursor:pointer;
+    border:4px solid #ffd6e8;
+    transition:.35s;
+    box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+.gallery img:hover{
+    transform:scale(1.05);
+}
+
+/* Footer */
+footer{
+    background:#ff9ecf;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:50px;
+}
+
+/* Lightbox */
+.lightbox{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.9);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.lightbox img{
+    max-width:90%;
+    max-height:90%;
+    border-radius:15px;
+}
+</style>
+
+</head>
+
+<body>
+
+<nav>
+    <a href="#home">หน้าแรก</a>
+    <a href="#about">เกี่ยวกับฉัน</a>
+    <a href="#portfolio">ผลงาน</a>
+</nav>
+
+<header id="home">
+
+    <!-- ถ้าไม่มี profile.jpg เปลี่ยนเป็น 1.jpg ได้ -->
+    <img src="images/1.jpg" alt="Profile">
+
+    <h1>มัลลิกา จั่นพิจิตร</h1>
+
+    <p>My Portfolio</p>
+
+</header>
+
+<section id="about">
+
+<h2>เกี่ยวกับฉัน</h2>
+
+<p style="text-align:center;font-size:18px;line-height:1.8;">
+สวัสดีค่ะ ดิฉันเป็นนักเรียนชั้นมัธยมศึกษาปีที่ 6
+มีความสนใจด้านการออกแบบ การสร้างสื่อดิจิทัล
+และการเขียนโปรแกรม
+</p>
+
 </section>
+
+<section id="portfolio">
+
+<h2>ผลงาน</h2>
+
+<div class="gallery">
+
+<img src="images/1.jpg" onclick="show(this.src)">
+<img src="images/2.jpg" onclick="show(this.src)">
+<img src="images/3.jpg" onclick="show(this.src)">
+<img src="images/4.jpg" onclick="show(this.src)">
+<img src="images/5.jpg" onclick="show(this.src)">
+<img src="images/6.jpg" onclick="show(this.src)">
+<img src="images/7.jpg" onclick="show(this.src)">
+<img src="images/8.jpg" onclick="show(this.src)">
+<img src="images/9.jpg" onclick="show(this.src)">
+<img src="images/10.jpg" onclick="show(this.src)">
+<img src="images/11.jpg" onclick="show(this.src)">
+<img src="images/12.jpg" onclick="show(this.src)">
+
+</div>
+
+</section>
+
+<footer>
+
+💕 © 2026 Portfolio | มัลลิกา จั่นพิจิตร 💕
+
+</footer>
+
+<div class="lightbox" id="lightbox" onclick="hide()">
+    <img id="big">
+</div>
+
+<script>
+function show(src){
+    document.getElementById("lightbox").style.display="flex";
+    document.getElementById("big").src=src;
+}
+
+function hide(){
+    document.getElementById("lightbox").style.display="none";
+}
+</script>
+
+</body>
+</html>
