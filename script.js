@@ -1,87 +1,90 @@
-const cards = document.querySelectorAll(".card");
+const items = document.querySelectorAll(".item");
 const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
+const preview = document.getElementById("preview");
+const counter = document.getElementById("counter");
 
-const closeBtn = document.getElementById("close");
-const prevBtn = document.getElementById("prev");
-const nextBtn = document.getElementById("next");
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
+const close = document.getElementById("close");
 
-let currentIndex = 0;
+let current = 0;
 
 // เปิดรูป
 function openImage(index){
-    currentIndex = index;
+    current = index;
+    preview.src = items[current].querySelector("img").src;
+    counter.textContent = `หน้า ${current + 1} / ${items.length}`;
     lightbox.style.display = "flex";
-    lightboxImg.src = cards[currentIndex].querySelector("img").src;
 }
 
 // คลิกการ์ด
-cards.forEach((card,index)=>{
-    card.addEventListener("click",()=>{
+items.forEach((item,index)=>{
+    item.addEventListener("click",()=>{
         openImage(index);
     });
 });
 
-// ปิด
-closeBtn.addEventListener("click",()=>{
-    lightbox.style.display="none";
-});
-
-// คลิกพื้นหลังปิด
-lightbox.addEventListener("click",(e)=>{
-    if(e.target===lightbox){
-        lightbox.style.display="none";
-    }
-});
-
-// รูปก่อนหน้า
-function previousImage(){
-    currentIndex--;
-    if(currentIndex<0){
-        currentIndex=cards.length-1;
-    }
-    lightboxImg.src=cards[currentIndex].querySelector("img").src;
-}
-
 // รูปถัดไป
 function nextImage(){
-    currentIndex++;
-    if(currentIndex>=cards.length){
-        currentIndex=0;
+    current++;
+    if(current >= items.length){
+        current = 0;
     }
-    lightboxImg.src=cards[currentIndex].querySelector("img").src;
+    preview.src = items[current].querySelector("img").src;
+    counter.textContent = `หน้า ${current + 1} / ${items.length}`;
 }
 
-prevBtn.addEventListener("click",(e)=>{
-    e.stopPropagation();
-    previousImage();
-});
+// รูปก่อนหน้า
+function prevImage(){
+    current--;
+    if(current < 0){
+        current = items.length - 1;
+    }
+    preview.src = items[current].querySelector("img").src;
+    counter.textContent = `หน้า ${current + 1} / ${items.length}`;
+}
 
-nextBtn.addEventListener("click",(e)=>{
+next.onclick = function(e){
     e.stopPropagation();
     nextImage();
-});
+}
 
-// คีย์บอร์ด
+prev.onclick = function(e){
+    e.stopPropagation();
+    prevImage();
+}
+
+close.onclick = function(){
+    lightbox.style.display = "none";
+}
+
+// คลิกพื้นหลังเพื่อปิด
+lightbox.onclick = function(e){
+    if(e.target === lightbox){
+        lightbox.style.display = "none";
+    }
+}
+
+// ปุ่มคีย์บอร์ด
 document.addEventListener("keydown",(e)=>{
 
-    if(lightbox.style.display!=="flex") return;
+    if(lightbox.style.display !== "flex") return;
 
-    if(e.key==="ArrowLeft"){
-        previousImage();
-    }
-
-    if(e.key==="ArrowRight"){
+    if(e.key === "ArrowRight"){
         nextImage();
     }
 
-    if(e.key==="Escape"){
-        lightbox.style.display="none";
+    if(e.key === "ArrowLeft"){
+        prevImage();
+    }
+
+    if(e.key === "Escape"){
+        lightbox.style.display = "none";
     }
 
 });
 
-// ปัดซ้าย-ขวาบนมือถือ
+// รองรับการปัดบนมือถือ
 let startX = 0;
 
 lightbox.addEventListener("touchstart",(e)=>{
@@ -92,12 +95,12 @@ lightbox.addEventListener("touchend",(e)=>{
 
     let endX = e.changedTouches[0].clientX;
 
-    if(startX-endX>50){
+    if(startX - endX > 50){
         nextImage();
     }
 
-    if(endX-startX>50){
-        previousImage();
+    if(endX - startX > 50){
+        prevImage();
     }
 
 });
