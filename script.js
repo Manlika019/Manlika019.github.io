@@ -11,95 +11,148 @@ let current = 0;
 
 // เปิดรูป
 function openImage(index){
+
     current = index;
+
     preview.src = items[current].querySelector("img").src;
-    counter.textContent = `หน้า ${current + 1} / ${items.length}`;
+
+    counter.textContent = `หน้า ${current+1} / ${items.length}`;
+
     lightbox.style.display = "flex";
+
+    preview.classList.remove("zoom");
+
 }
 
 // คลิกการ์ด
 items.forEach((item,index)=>{
+
     item.addEventListener("click",()=>{
+
         openImage(index);
+
     });
+
 });
 
 // รูปถัดไป
 function nextImage(){
+
     current++;
-    if(current >= items.length){
-        current = 0;
+
+    if(current>=items.length){
+        current=0;
     }
-    preview.src = items[current].querySelector("img").src;
-    counter.textContent = `หน้า ${current + 1} / ${items.length}`;
+
+    preview.classList.remove("zoom");
+
+    preview.style.opacity=0;
+
+    setTimeout(()=>{
+
+        preview.src=items[current].querySelector("img").src;
+
+        preview.style.opacity=1;
+
+    },150);
+
+    counter.textContent=`หน้า ${current+1} / ${items.length}`;
+
 }
 
 // รูปก่อนหน้า
 function prevImage(){
+
     current--;
-    if(current < 0){
-        current = items.length - 1;
+
+    if(current<0){
+        current=items.length-1;
     }
-    preview.src = items[current].querySelector("img").src;
-    counter.textContent = `หน้า ${current + 1} / ${items.length}`;
+
+    preview.classList.remove("zoom");
+
+    preview.style.opacity=0;
+
+    setTimeout(()=>{
+
+        preview.src=items[current].querySelector("img").src;
+
+        preview.style.opacity=1;
+
+    },150);
+
+    counter.textContent=`หน้า ${current+1} / ${items.length}`;
+
 }
 
-next.onclick = function(e){
+// ปุ่ม
+next.onclick=(e)=>{
     e.stopPropagation();
     nextImage();
 }
 
-prev.onclick = function(e){
+prev.onclick=(e)=>{
     e.stopPropagation();
     prevImage();
 }
 
-close.onclick = function(){
-    lightbox.style.display = "none";
+close.onclick=()=>{
+    lightbox.style.display="none";
 }
 
-// คลิกพื้นหลังเพื่อปิด
-lightbox.onclick = function(e){
-    if(e.target === lightbox){
-        lightbox.style.display = "none";
+// คลิกพื้นหลังปิด
+lightbox.onclick=(e)=>{
+    if(e.target===lightbox){
+        lightbox.style.display="none";
     }
 }
 
-// ปุ่มคีย์บอร์ด
+// คีย์บอร์ด
 document.addEventListener("keydown",(e)=>{
 
-    if(lightbox.style.display !== "flex") return;
+    if(lightbox.style.display!=="flex") return;
 
-    if(e.key === "ArrowRight"){
+    if(e.key==="ArrowRight"){
         nextImage();
     }
 
-    if(e.key === "ArrowLeft"){
+    if(e.key==="ArrowLeft"){
         prevImage();
     }
 
-    if(e.key === "Escape"){
-        lightbox.style.display = "none";
+    if(e.key==="Escape"){
+        lightbox.style.display="none";
     }
 
 });
 
-// รองรับการปัดบนมือถือ
-let startX = 0;
+// ซูมรูป
+preview.addEventListener("click",(e)=>{
+
+    e.stopPropagation();
+
+    preview.classList.toggle("zoom");
+
+});
+
+// ปัดซ้ายขวา
+let startX=0;
 
 lightbox.addEventListener("touchstart",(e)=>{
-    startX = e.touches[0].clientX;
+
+    startX=e.touches[0].clientX;
+
 });
 
 lightbox.addEventListener("touchend",(e)=>{
 
-    let endX = e.changedTouches[0].clientX;
+    let endX=e.changedTouches[0].clientX;
 
-    if(startX - endX > 50){
+    if(startX-endX>50){
         nextImage();
     }
 
-    if(endX - startX > 50){
+    if(endX-startX>50){
         prevImage();
     }
 
