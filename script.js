@@ -1,159 +1,210 @@
-const items = document.querySelectorAll(".item");
+const items = document.querySelectorAll(".item img");
+
 const lightbox = document.getElementById("lightbox");
+
 const preview = document.getElementById("preview");
-const counter = document.getElementById("counter");
+
+const close = document.getElementById("close");
+
+const next = document.getElementById("next");
 
 const prev = document.getElementById("prev");
-const next = document.getElementById("next");
-const close = document.getElementById("close");
+
+const counter = document.getElementById("counter");
+
+
+
+let images = [];
 
 let current = 0;
 
-// เปิดรูป
-function openImage(index){
 
-    current = index;
 
-    preview.src = items[current].querySelector("img").src;
+// เก็บรูปทั้งหมด
 
-    counter.textContent = `หน้า ${current+1} / ${items.length}`;
+items.forEach((img,index)=>{
 
-    lightbox.style.display = "flex";
 
-    preview.classList.remove("zoom");
+    images.push(img.src);
 
-}
 
-// คลิกการ์ด
-items.forEach((item,index)=>{
 
-    item.addEventListener("click",()=>{
+    img.onclick = ()=>{
 
-        openImage(index);
 
-    });
+        current=index;
+
+
+        lightbox.style.display="flex";
+
+
+        preview.style.animation="none";
+
+
+        setTimeout(()=>{
+
+            preview.style.animation="openPage .5s ease";
+
+        },10);
+
+
+
+        showImage();
+
+
+    }
+
 
 });
 
+
+
+
+// แสดงรูป
+
+function showImage(){
+
+
+    preview.src = images[current];
+
+
+    counter.innerHTML = 
+    `${current+1} / ${images.length}`;
+
+
+}
+
+
+
+
+
 // รูปถัดไป
-function nextImage(){
+
+next.onclick=()=>{
+
 
     current++;
 
-    if(current>=items.length){
+
+    if(current >= images.length){
+
         current=0;
+
     }
 
-    preview.classList.remove("zoom");
 
-    preview.style.opacity=0;
+    showImage();
 
-    setTimeout(()=>{
 
-        preview.src=items[current].querySelector("img").src;
+    animate();
 
-        preview.style.opacity=1;
-
-    },150);
-
-    counter.textContent=`หน้า ${current+1} / ${items.length}`;
 
 }
 
+
+
+
 // รูปก่อนหน้า
-function prevImage(){
+
+prev.onclick=()=>{
+
 
     current--;
 
-    if(current<0){
-        current=items.length-1;
+
+    if(current < 0){
+
+        current=images.length-1;
+
     }
 
-    preview.classList.remove("zoom");
 
-    preview.style.opacity=0;
+    showImage();
+
+
+    animate();
+
+
+}
+
+
+
+
+// Animation เวลาเปลี่ยนหน้า
+
+function animate(){
+
+
+    preview.style.animation="none";
+
 
     setTimeout(()=>{
 
-        preview.src=items[current].querySelector("img").src;
 
-        preview.style.opacity=1;
+        preview.style.animation="openPage .5s ease";
 
-    },150);
 
-    counter.textContent=`หน้า ${current+1} / ${items.length}`;
+    },10);
+
 
 }
 
-// ปุ่ม
-next.onclick=(e)=>{
-    e.stopPropagation();
-    nextImage();
-}
 
-prev.onclick=(e)=>{
-    e.stopPropagation();
-    prevImage();
-}
+
+
+// ปิด
 
 close.onclick=()=>{
+
+
     lightbox.style.display="none";
+
+
 }
+
+
 
 // คลิกพื้นหลังปิด
+
 lightbox.onclick=(e)=>{
+
+
     if(e.target===lightbox){
+
         lightbox.style.display="none";
+
     }
+
+
 }
 
-// คีย์บอร์ด
+
+
+
+// ใช้คีย์บอร์ด
+
 document.addEventListener("keydown",(e)=>{
 
-    if(lightbox.style.display!=="flex") return;
 
     if(e.key==="ArrowRight"){
-        nextImage();
+
+        next.click();
+
     }
+
 
     if(e.key==="ArrowLeft"){
-        prevImage();
+
+        prev.click();
+
     }
+
 
     if(e.key==="Escape"){
-        lightbox.style.display="none";
+
+        close.click();
+
     }
 
-});
-
-// ซูมรูป
-preview.addEventListener("click",(e)=>{
-
-    e.stopPropagation();
-
-    preview.classList.toggle("zoom");
-
-});
-
-// ปัดซ้ายขวา
-let startX=0;
-
-lightbox.addEventListener("touchstart",(e)=>{
-
-    startX=e.touches[0].clientX;
-
-});
-
-lightbox.addEventListener("touchend",(e)=>{
-
-    let endX=e.changedTouches[0].clientX;
-
-    if(startX-endX>50){
-        nextImage();
-    }
-
-    if(endX-startX>50){
-        prevImage();
-    }
 
 });
