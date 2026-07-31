@@ -1,25 +1,25 @@
-// เปิดรูปขนาดใหญ่
-function show(src) {
-    const lightbox = document.getElementById("lightbox");
-    const big = document.getElementById("big");
+// สร้างกล่องแสดงรูป
+const lightbox = document.createElement("div");
+lightbox.id = "lightbox";
+lightbox.innerHTML = '<img id="lightbox-img">';
+document.body.appendChild(lightbox);
 
-    big.src = src;
-    lightbox.style.display = "flex";
-}
-
-// ปิดรูป
-function hide() {
-    document.getElementById("lightbox").style.display = "none";
-}
-
-// กดปุ่ม ESC เพื่อปิด
-document.addEventListener("keydown", function(event) {
-    if (event.key === "Escape") {
-        hide();
-    }
+// เมื่อคลิกรูป
+document.querySelectorAll(".page img").forEach(img => {
+    img.addEventListener("click", function () {
+        document.getElementById("lightbox-img").src = this.src;
+        lightbox.style.display = "flex";
+    });
 });
 
-// ป้องกันการปิดเมื่อคลิกที่รูป
-document.getElementById("big").addEventListener("click", function(event) {
-    event.stopPropagation();
+// คลิกพื้นหลังเพื่อปิด
+lightbox.addEventListener("click", function () {
+    lightbox.style.display = "none";
+});
+
+// กด ESC เพื่อปิด
+document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+        lightbox.style.display = "none";
+    }
 });
