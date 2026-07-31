@@ -7,7 +7,7 @@ body{
 
     margin:0;
 
-    background:#fff8fc;
+    background:#fff7fb;
 
     font-family:'Kanit',sans-serif;
 
@@ -26,13 +26,14 @@ header{
 }
 
 
+
 header h1{
 
     margin:0;
 
-    font-size:42px;
-
     color:#e889b5;
+
+    font-size:42px;
 
 }
 
@@ -45,29 +46,35 @@ header p{
 
 
 
-/* กระดานรูป */
+/* กระดานแนวนอน */
 
 .board{
 
     display:flex;
 
-    flex-wrap:wrap;
+    flex-direction:row;
 
-    gap:15px;
+    gap:20px;
 
-    justify-content:center;
+    padding:30px;
 
-    padding:20px;
+    overflow-x:auto;
+
+    white-space:nowrap;
 
 }
 
 
 
+/* รูปเล็ก */
+
 .page{
 
-    width:140px;
+    flex:0 0 auto;
 
-    height:200px;
+    width:150px;
+
+    height:220px;
 
     cursor:pointer;
 
@@ -85,7 +92,7 @@ header p{
 
     object-fit:cover;
 
-    border-radius:12px;
+    border-radius:15px;
 
     box-shadow:0 5px 15px #ccc;
 
@@ -102,10 +109,9 @@ header p{
 
 
 
+/* พื้นหลังขยาย */
 
-/* หน้าต่างขยาย */
-
-.viewer{
+.popup{
 
     display:none;
 
@@ -113,19 +119,20 @@ header p{
 
     inset:0;
 
-    background:rgba(0,0,0,.65);
+    background:rgba(0,0,0,.7);
 
     justify-content:center;
 
     align-items:center;
 
-    z-index:1000;
+    z-index:999;
 
 }
 
 
 
-.zoomBox{
+
+.popup-box{
 
     position:relative;
 
@@ -133,68 +140,74 @@ header p{
 
 
 
-.zoomBox img{
 
-    height:75vh;
+/* รูปใหญ่ */
 
-    max-width:65vw;
+.popup-box img{
+
+    height:70vh;
+
+    max-width:60vw;
 
     object-fit:contain;
 
     border-radius:15px;
 
-    box-shadow:0 15px 50px black;
+    box-shadow:0 15px 40px black;
 
-    animation:open .35s ease;
+    animation:zoom .35s ease;
+
+}
+
+
+
+
+@keyframes zoom{
+
+
+from{
+
+    transform:scale(.25);
+
+    opacity:0;
+
+}
+
+
+to{
+
+    transform:scale(1);
+
+    opacity:1;
+
+}
+
 
 }
 
 
 
-
-@keyframes open{
-
-
-    from{
-
-        transform:scale(.25);
-
-        opacity:0;
-
-    }
-
-
-    to{
-
-        transform:scale(1);
-
-        opacity:1;
-
-    }
-
-}
-
-
+/* ปุ่มปิด */
 
 #close{
 
     position:absolute;
 
-    right:-20px;
+    top:-25px;
 
-    top:-20px;
+    right:-25px;
 
     width:45px;
 
     height:45px;
 
-    border-radius:50%;
-
     border:none;
 
-    font-size:30px;
+    border-radius:50%;
 
     background:white;
+
+    font-size:30px;
 
     cursor:pointer;
 
