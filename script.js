@@ -1,53 +1,81 @@
-const totalPages = 12;
-let currentPage = 1;
+const images = document.querySelectorAll(".gallery img");
 
-const image = document.getElementById("pageImage");
-const pageNumber = document.getElementById("pageNumber");
-const prev = document.getElementById("prev");
-const next = document.getElementById("next");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
 
-// แสดงรูป
-function showPage(page) {
-    image.style.opacity = 0;
+const closeBtn = document.getElementById("close");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
 
-    setTimeout(() => {
-        image.src = page + ".jpg";
-        pageNumber.textContent = `หน้า ${page} / ${totalPages}`;
-        image.style.opacity = 1;
-    }, 200);
+let current = 0;
 
-    prev.disabled = (page === 1);
-    next.disabled = (page === totalPages);
+// เปิดรูป
+function showImage(index){
+    current = index;
+    lightbox.style.display = "flex";
+    lightboxImg.src = images[current].src;
 }
 
-// ปุ่มถัดไป
-next.addEventListener("click", () => {
-    if (currentPage < totalPages) {
-        currentPage++;
-        showPage(currentPage);
-    }
+// คลิกรูป
+images.forEach((img,index)=>{
+    img.addEventListener("click",()=>{
+        showImage(index);
+    });
 });
 
-// ปุ่มก่อนหน้า
-prev.addEventListener("click", () => {
-    if (currentPage > 1) {
-        currentPage--;
-        showPage(currentPage);
+// ปิด
+closeBtn.onclick = ()=>{
+    lightbox.style.display="none";
+};
+
+// คลิกพื้นหลังปิด
+lightbox.onclick=(e)=>{
+    if(e.target===lightbox){
+        lightbox.style.display="none";
     }
-});
+};
+
+// รูปก่อนหน้า
+prevBtn.onclick=(e)=>{
+    e.stopPropagation();
+
+    current--;
+
+    if(current<0){
+        current=images.length-1;
+    }
+
+    lightboxImg.src=images[current].src;
+};
+
+// รูปถัดไป
+nextBtn.onclick=(e)=>{
+    e.stopPropagation();
+
+    current++;
+
+    if(current>=images.length){
+        current=0;
+    }
+
+    lightboxImg.src=images[current].src;
+};
 
 // คีย์บอร์ด
-document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight" && currentPage < totalPages) {
-        currentPage++;
-        showPage(currentPage);
+document.addEventListener("keydown",(e)=>{
+
+    if(lightbox.style.display!="flex") return;
+
+    if(e.key==="ArrowRight"){
+        nextBtn.click();
     }
 
-    if (e.key === "ArrowLeft" && currentPage > 1) {
-        currentPage--;
-        showPage(currentPage);
+    if(e.key==="ArrowLeft"){
+        prevBtn.click();
     }
+
+    if(e.key==="Escape"){
+        lightbox.style.display="none";
+    }
+
 });
-
-// เริ่มต้น
-showPage(currentPage);
