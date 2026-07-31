@@ -1,105 +1,264 @@
-const items = document.querySelectorAll(".item img");
+*{
+    box-sizing:border-box;
+}
 
-const lightbox = document.getElementById("lightbox");
-const preview = document.getElementById("preview");
-const close = document.getElementById("close");
-const next = document.getElementById("next");
-const prev = document.getElementById("prev");
-const counter = document.getElementById("counter");
-
-
-let current = 0;
+body{
+    margin:0;
+    font-family:'Kanit',sans-serif;
+    background:#fff7fb;
+}
 
 
-let images = [];
+/* Header */
 
-items.forEach((img,index)=>{
+header{
+    text-align:center;
+    padding:30px;
+}
 
-    images.push(img.src);
+header h1{
+    color:#e88ab3;
+    font-size:40px;
+}
 
-    img.onclick = ()=>{
-
-        current=index;
-        showImage();
-
-        lightbox.style.display="flex";
-
-    }
-
-});
+header p{
+    font-size:22px;
+}
 
 
-function showImage(){
+/* Gallery */
 
-    preview.src=images[current];
+.container{
+    width:90%;
+    margin:auto;
+}
 
-    counter.innerHTML=
-    `${current+1} / ${images.length}`;
+
+.gallery{
+    display:flex;
+    flex-wrap:wrap;
+    gap:18px;
+    justify-content:center;
+}
+
+
+.item{
+    width:180px;
+    cursor:pointer;
+    text-align:center;
+    transition:.3s;
+}
+
+
+.item img{
+    width:180px;
+    height:240px;
+    object-fit:cover;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+
+.item:hover{
+    transform:translateY(-10px) scale(1.05);
+}
+
+
+.item span{
+    display:block;
+    margin-top:10px;
+    font-size:18px;
+}
+
+
+
+/* Lightbox */
+
+#lightbox{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.8);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:999;
 
 }
 
 
 
-next.onclick=()=>{
+.viewer{
 
-    current++;
+    position:relative;
 
-    if(current>=images.length){
-        current=0;
-    }
+    display:flex;
 
-    showImage();
+    align-items:center;
 
-}
-
-
-
-prev.onclick=()=>{
-
-    current--;
-
-    if(current<0){
-        current=images.length-1;
-    }
-
-    showImage();
+    justify-content:center;
 
 }
 
 
 
-close.onclick=()=>{
+#preview{
 
-    lightbox.style.display="none";
+    max-width:75vw;
 
-}
+    max-height:85vh;
 
+    border-radius:20px;
 
+    box-shadow:0 20px 60px rgba(0,0,0,.6);
 
-lightbox.onclick=(e)=>{
-
-    if(e.target===lightbox){
-
-        lightbox.style.display="none";
-
-    }
+    animation:openPage .5s ease;
 
 }
 
 
 
-document.addEventListener("keydown",(e)=>{
 
-    if(e.key==="ArrowRight"){
-        next.click();
+/* Animation เปิดรูป */
+
+@keyframes openPage{
+
+
+    0%{
+
+        transform:scale(.2) rotateY(90deg);
+
+        opacity:0;
+
     }
 
-    if(e.key==="ArrowLeft"){
-        prev.click();
+
+    50%{
+
+        transform:scale(1.1) rotateY(-10deg);
+
     }
 
-    if(e.key==="Escape"){
-        close.click();
+
+    100%{
+
+        transform:scale(1) rotateY(0);
+
+        opacity:1;
+
     }
 
-});
+}
+
+
+
+/* ปุ่ม */
+
+button{
+
+    position:absolute;
+
+    width:55px;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:white;
+
+    cursor:pointer;
+
+    font-size:35px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.3);
+
+}
+
+
+
+#close{
+
+    top:-70px;
+
+    right:0;
+
+}
+
+
+
+#prev{
+
+    left:-90px;
+
+}
+
+
+
+#next{
+
+    right:-90px;
+
+}
+
+
+
+#counter{
+
+    position:absolute;
+
+    bottom:-55px;
+
+    color:white;
+
+    font-size:22px;
+
+    width:100%;
+
+    text-align:center;
+
+}
+
+
+
+/* มือถือ */
+
+@media(max-width:600px){
+
+    .item{
+
+        width:140px;
+
+    }
+
+
+    .item img{
+
+        width:140px;
+
+        height:190px;
+
+    }
+
+
+    #prev{
+
+        left:-60px;
+
+    }
+
+
+    #next{
+
+        right:-60px;
+
+    }
+
+}
