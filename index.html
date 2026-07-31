@@ -1,101 +1,67 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+<title>Portfolio | มัลลิกา จั่นพิจิตร</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
 
 </head>
+
 <body>
 
 <header>
 
-    <h1>🌸 My Portfolio 🌸</h1>
+<h1>🌸 My Portfolio 🌸</h1>
 
-    <p>มัลลิกา จั่นพิจิตร</p>
+<p>มัลลิกา จั่นพิจิตร</p>
 
 </header>
 
-<section class="gallery">
+<div class="container">
 
-<div class="card">
-<img src="1.jpg">
-<div class="overlay">หน้าที่ 1</div>
+<div class="gallery">
+
+<div class="item"><img src="1.jpg"><span>หน้าที่ 1</span></div>
+<div class="item"><img src="2.jpg"><span>หน้าที่ 2</span></div>
+<div class="item"><img src="3.jpg"><span>หน้าที่ 3</span></div>
+<div class="item"><img src="4.jpg"><span>หน้าที่ 4</span></div>
+
+<div class="item"><img src="5.jpg"><span>หน้าที่ 5</span></div>
+<div class="item"><img src="6.jpg"><span>หน้าที่ 6</span></div>
+<div class="item"><img src="7.jpg"><span>หน้าที่ 7</span></div>
+<div class="item"><img src="8.jpg"><span>หน้าที่ 8</span></div>
+
+<div class="item"><img src="9.jpg"><span>หน้าที่ 9</span></div>
+<div class="item"><img src="10.jpg"><span>หน้าที่ 10</span></div>
+<div class="item"><img src="11.jpg"><span>หน้าที่ 11</span></div>
+<div class="item"><img src="12.jpg"><span>หน้าที่ 12</span></div>
+
 </div>
 
-<div class="card">
-<img src="2.jpg">
-<div class="overlay">หน้าที่ 2</div>
 </div>
-
-<div class="card">
-<img src="3.jpg">
-<div class="overlay">หน้าที่ 3</div>
-</div>
-
-<div class="card">
-<img src="4.jpg">
-<div class="overlay">หน้าที่ 4</div>
-</div>
-
-<div class="card">
-<img src="5.jpg">
-<div class="overlay">หน้าที่ 5</div>
-</div>
-
-<div class="card">
-<img src="6.jpg">
-<div class="overlay">หน้าที่ 6</div>
-</div>
-
-<div class="card">
-<img src="7.jpg">
-<div class="overlay">หน้าที่ 7</div>
-</div>
-
-<div class="card">
-<img src="8.jpg">
-<div class="overlay">หน้าที่ 8</div>
-</div>
-
-<div class="card">
-<img src="9.jpg">
-<div class="overlay">หน้าที่ 9</div>
-</div>
-
-<div class="card">
-<img src="10.jpg">
-<div class="overlay">หน้าที่ 10</div>
-</div>
-
-<div class="card">
-<img src="11.jpg">
-<div class="overlay">หน้าที่ 11</div>
-</div>
-
-<div class="card">
-<img src="12.jpg">
-<div class="overlay">หน้าที่ 12</div>
-</div>
-
-</section>
 
 <!-- Lightbox -->
 
 <div id="lightbox">
 
+<div class="viewer">
+
 <button id="close">&times;</button>
 
 <button id="prev">&#10094;</button>
 
-<img id="lightbox-img">
+<img id="preview">
 
 <button id="next">&#10095;</button>
+
+<div id="counter"></div>
+
+</div>
 
 </div>
 
