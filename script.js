@@ -1,57 +1,56 @@
-const pages = document.querySelectorAll(".page img");
+const images = document.querySelectorAll(".page img");
 
-const viewer = document.getElementById("viewer");
+const popup = document.getElementById("popup");
 
-const showImage = document.getElementById("showImage");
+const bigImage = document.getElementById("bigImage");
 
 const close = document.getElementById("close");
 
 
 
-pages.forEach((img)=>{
+images.forEach((img)=>{
 
 
-    img.addEventListener("click",()=>{
+    img.onclick=function(){
 
 
-        showImage.src = img.src;
+        bigImage.src=this.src;
 
 
-        viewer.style.display="flex";
+        popup.style.display="flex";
 
 
-        showImage.style.animation="none";
+        bigImage.style.animation="none";
 
 
         setTimeout(()=>{
 
-            showImage.style.animation="open .35s ease";
+            bigImage.style.animation="zoom .35s ease";
 
         },10);
 
 
-
-    });
+    };
 
 
 });
 
 
 
-close.onclick=()=>{
+close.onclick=function(){
 
-    viewer.style.display="none";
+    popup.style.display="none";
 
 };
 
 
 
-viewer.onclick=(e)=>{
+popup.onclick=function(e){
 
 
-    if(e.target===viewer){
+    if(e.target===popup){
 
-        viewer.style.display="none";
+        popup.style.display="none";
 
     }
 
