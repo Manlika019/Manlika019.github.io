@@ -1,8 +1,9 @@
-const items = document.querySelectorAll(".item img");
+const cards = document.querySelectorAll(".card img");
 
-const lightbox = document.getElementById("lightbox");
 
-const preview = document.getElementById("preview");
+const popup = document.getElementById("popup");
+
+const bigImage = document.getElementById("bigImage");
 
 const close = document.getElementById("close");
 
@@ -10,49 +11,32 @@ const next = document.getElementById("next");
 
 const prev = document.getElementById("prev");
 
-const counter = document.getElementById("counter");
+const number = document.getElementById("number");
 
 
 
-let images = [];
+let images=[];
 
-let current = 0;
-
-
-
-// เก็บรูปทั้งหมด
-
-items.forEach((img,index)=>{
-
-
-    images.push(img.src);
+let current=0;
 
 
 
-    img.onclick = ()=>{
+cards.forEach((img,index)=>{
 
 
-        current=index;
-
-
-        lightbox.style.display="flex";
-
-
-        preview.style.animation="none";
-
-
-        setTimeout(()=>{
-
-            preview.style.animation="openPage .5s ease";
-
-        },10);
+images.push(img.src);
 
 
 
-        showImage();
+img.onclick=()=>{
 
 
-    }
+current=index;
+
+open();
+
+
+};
 
 
 });
@@ -60,16 +44,27 @@ items.forEach((img,index)=>{
 
 
 
-// แสดงรูป
-
-function showImage(){
+function open(){
 
 
-    preview.src = images[current];
+popup.style.display="flex";
 
 
-    counter.innerHTML = 
-    `${current+1} / ${images.length}`;
+bigImage.src=images[current];
+
+
+bigImage.style.animation="none";
+
+
+setTimeout(()=>{
+
+bigImage.style.animation="show .5s";
+
+},10);
+
+
+number.innerHTML=
+`${current+1} / ${images.length}`;
 
 
 }
@@ -77,134 +72,96 @@ function showImage(){
 
 
 
+close.onclick=()=>{
 
-// รูปถัดไป
+popup.style.display="none";
+
+};
+
+
 
 next.onclick=()=>{
 
 
-    current++;
+current++;
 
 
-    if(current >= images.length){
+if(current>=images.length){
 
-        current=0;
-
-    }
-
-
-    showImage();
-
-
-    animate();
-
+current=0;
 
 }
 
 
+open();
 
 
-// รูปก่อนหน้า
+};
+
+
+
 
 prev.onclick=()=>{
 
 
-    current--;
+current--;
 
 
-    if(current < 0){
+if(current<0){
 
-        current=images.length-1;
-
-    }
-
-
-    showImage();
-
-
-    animate();
-
+current=images.length-1;
 
 }
 
 
+open();
 
 
-// Animation เวลาเปลี่ยนหน้า
+};
 
-function animate(){
-
-
-    preview.style.animation="none";
-
-
-    setTimeout(()=>{
-
-
-        preview.style.animation="openPage .5s ease";
-
-
-    },10);
-
-
-}
-
-
-
-
-// ปิด
-
-close.onclick=()=>{
-
-
-    lightbox.style.display="none";
-
-
-}
 
 
 
 // คลิกพื้นหลังปิด
 
-lightbox.onclick=(e)=>{
+popup.onclick=(e)=>{
 
 
-    if(e.target===lightbox){
+if(e.target===popup){
 
-        lightbox.style.display="none";
-
-    }
-
+popup.style.display="none";
 
 }
 
 
+};
 
 
-// ใช้คีย์บอร์ด
 
-document.addEventListener("keydown",(e)=>{
+// คีย์บอร์ด
 
-
-    if(e.key==="ArrowRight"){
-
-        next.click();
-
-    }
+document.onkeydown=(e)=>{
 
 
-    if(e.key==="ArrowLeft"){
+if(e.key==="Escape"){
 
-        prev.click();
+popup.style.display="none";
 
-    }
-
-
-    if(e.key==="Escape"){
-
-        close.click();
-
-    }
+}
 
 
-});
+if(e.key==="ArrowRight"){
+
+next.click();
+
+}
+
+
+if(e.key==="ArrowLeft"){
+
+prev.click();
+
+}
+
+
+};
